@@ -63,6 +63,24 @@ public class Extractor {
         return extract(convert(objects, features, dataset, classDistribution), metaFeatureIndexes);
     }
 
+    public static Instances getInstances(int objects, int features, int classes) {
+        ArrayList<Attribute> attributes = new ArrayList<>();
+        for (int f = 0; f < features; f++) {
+            attributes.add(new Attribute("a" + f));
+        }
+
+        ArrayList<String> classNames = new ArrayList<>();
+        for (int c = 0; c < classes; c++) {
+            classNames.add("c" + c);
+        }
+        attributes.add(new Attribute("class", classNames));
+
+        Instances instances = new Instances("data", attributes, objects);
+        instances.setClassIndex(features);
+        return instances;
+
+    }
+
     public static Instances convert(int objects, int features, double[][] dataset, int[] classDistribution) {
         int sumC = 0;
         for (int v : classDistribution) {
@@ -72,19 +90,7 @@ public class Extractor {
             throw new IllegalArgumentException("Sum values of classDistribution should equals to number of objects");
         }
 
-        ArrayList<Attribute> attributes = new ArrayList<>();
-        for (int f = 0; f < features; f++) {
-            attributes.add(new Attribute("a" + f));
-        }
-
-        ArrayList<String> classNames = new ArrayList<>();
-        for (int c = 0; c < classDistribution.length; c++) {
-            classNames.add("c" + c);
-        }
-        attributes.add(new Attribute("class", classNames));
-
-        Instances instances = new Instances("data", attributes, objects);
-        instances.setClassIndex(features);
+        Instances instances = getInstances(objects, features, classDistribution.length);
 
         int c = 0;
         int cnt = 0;
