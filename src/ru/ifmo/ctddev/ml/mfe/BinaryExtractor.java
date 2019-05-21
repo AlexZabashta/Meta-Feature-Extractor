@@ -5,12 +5,14 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.logging.LogManager;
 
 import weka.core.Instances;
 
 public class BinaryExtractor {
 
     public static void main(String[] args) throws IOException {
+        LogManager.getLogManager().reset();
         final int objects = Integer.parseInt(args[0]), features = Integer.parseInt(args[1]), classes = 2;
         byte[] buffer = new byte[4096];
 
