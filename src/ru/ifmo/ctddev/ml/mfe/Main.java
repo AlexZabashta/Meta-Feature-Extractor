@@ -3,10 +3,8 @@ package ru.ifmo.ctddev.ml.mfe;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
-import weka.core.DenseInstance;
 import weka.core.Instances;
 
 public class Main {
@@ -25,44 +23,49 @@ public class Main {
     }
 
     static double nextDouble(BufferedReader reader) throws IOException {
-        return Double.parseDouble(next(reader));
+        double value = Double.parseDouble(next(reader));
+        if (Double.isFinite(value)) {
+            return value;
+        } else {
+            throw new IllegalArgumentException("Wrong value " + value);
+        }
     }
 
     public static void main(String[] args) throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
 
-            int metaFeaturesLength = nextInt(reader);
-            int[] metaFeatureIndexes = new int[metaFeaturesLength];
-
-            for (int mfid = 0; mfid < metaFeaturesLength; mfid++) {
-                metaFeatureIndexes[mfid] = nextInt(reader);
-            }
-
             while (true) {
 
                 int objects = nextInt(reader), features = nextInt(reader), classes = nextInt(reader);
-                Instances instances = Extractor.getInstances(objects, features, classes);
+
+                double[][] data = new double[objects][features];
+                int[] labels = new int[objects];
 
                 for (int oid = 0; oid < objects; oid++) {
-
-                    DenseInstance instance = new DenseInstance(features + 1);
-                    instance.setDataset(instances);
-
-                    for (int fid = 0; fid <= features; fid++) {
-                        instance.setValue(fid, nextDouble(reader));
+                    for (int fid = 0; fid < features; fid++) {
+                        data[oid][fid] = nextDouble(reader);
                     }
-                    instances.add(instance);
+                    labels[oid] = nextInt(reader);
+
+                    if (labels[oid] < 0 || classes <= labels[oid]) {
+                        throw new IllegalArgumentException("Wrong label " + labels[oid]);
+                    }
+
                 }
 
-                double[] metaFeatures = Extractor.extract(instances, metaFeatureIndexes);
+                Utils.normalize(objects, features, data);
+                Instances instances = Utils.convert(objects, features, classes, data, labels);
 
-                for (int mfid = 0; mfid < metaFeaturesLength; mfid++) {
+                double[] metaFeatures = MetaFeatures.extract(objects, features, classes, data, labels, instances);
+
+                for (int mfid = 0; mfid < metaFeatures.length; mfid++) {
                     if (mfid != 0) {
                         System.out.print(' ');
                     }
                     System.out.print(metaFeatures[mfid]);
                 }
-                System.out.flush();               
+                System.out.println();
+                System.out.flush();
 
             }
         }
