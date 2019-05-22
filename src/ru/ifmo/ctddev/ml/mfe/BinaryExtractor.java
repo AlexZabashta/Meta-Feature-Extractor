@@ -42,8 +42,7 @@ public class BinaryExtractor {
                         }
                         labels[oid] = (2 * oid < objects) ? 0 : 1;
                     }
-
-                    // Utils.normalize(objects, features, data);
+                    Utils.normalize(objects, features, data);
                     Instances instances = Utils.convert(objects, features, classes, data, labels);
 
                     double[] metaFeatures = JointDecMF.extract(objects, features, classes, data, labels, instances);
