@@ -31,7 +31,7 @@ public class Landmark implements ToDoubleBiFunction<Instances, Random> {
                 throw new IllegalStateException("Invalid F-score = " + fscore);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.err.println(e.getMessage());
             return 0;
         }
     }

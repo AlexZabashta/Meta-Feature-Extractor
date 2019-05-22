@@ -5,14 +5,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.logging.LogManager;
 
 import weka.core.Instances;
 
 public class BinaryExtractor {
 
     public static void main(String[] args) throws IOException {
-        LogManager.getLogManager().reset();
+        // LogManager.getLogManager().reset();
+
+        int len = JointDecMF.LENGTH;
         final int objects = Integer.parseInt(args[0]), features = Integer.parseInt(args[1]), classes = 2;
         byte[] buffer = new byte[4096];
 
@@ -45,8 +46,8 @@ public class BinaryExtractor {
                     // Utils.normalize(objects, features, data);
                     Instances instances = Utils.convert(objects, features, classes, data, labels);
 
-                    double[] metaFeatures = MetaFeatures.extract(objects, features, classes, data, labels, instances);
-
+                    double[] metaFeatures = JointDecMF.extract(objects, features, classes, data, labels, instances);
+                    assert len == metaFeatures.length;
                     ByteBuffer outputBuffer = ByteBuffer.allocate(metaFeatures.length * Double.BYTES);
                     outputBuffer.order(ByteOrder.LITTLE_ENDIAN);
                     for (double value : metaFeatures) {

@@ -25,10 +25,10 @@ import weka.classifiers.trees.j48.ModelSelection;
 import weka.core.Instances;
 
 public class MetaFeatures {
-    public static final int LENGTH = 29;
+    public static final int LENGTH = 23;
 
-    static final String[] names = { "meanCorrelation", "meanKurtosis", "meanSkewness", "meanClassVar", "minClassVar", "maxClassVar", "meanInClassDist", "minInClassDist", "maxInClassDist", "meanOutClassDist", "minOutClassDist", "maxOutClassDist", "TreeDevAttr", "TreeDevBranch", "TreeDevLevel", "TreeHeight",
-            "TreeLeavesNumber", "TreeMaxAttr", "TreeMaxBranch", "TreeMaxLevel", "TreeMeanAttr", "TreeMeanBranch", "TreeMeanLevel", "TreeNodeNumber", "TreeWidth", "TreeDevClass", "TreeMaxClass", "TreeMinClass", "TreeMeanClass" };
+    static final String[] names = { "meanCorrelation", "meanKurtosis", "meanSkewness", "meanClassVar", "minClassVar", "maxClassVar", "meanInClassDist", "minInClassDist", "maxInClassDist", "meanOutClassDist", "minOutClassDist", "maxOutClassDist", "Tree", "Tree", "Tree", "Tree", "Tree", "Tree", "Tree", "Tree", "Tree",
+            "Tree", "Tree", "Tree", "Tree", "Tree", "Tree", "Tree", "Tree" };
 
     public static String name(int index) {
         return names[index];
@@ -202,28 +202,28 @@ public class MetaFeatures {
             WrappedC45DecisionTree tree = new WrappedC45DecisionTree(modelSelection, true);
             tree.buildClassifier(instances);
 
-            metaFeatures[mfid + 0] = (new PrunedTreeDevAttr()).extractValue(tree);
-            metaFeatures[mfid + 1] = (new PrunedTreeDevBranch()).extractValue(tree);
-            metaFeatures[mfid + 2] = (new PrunedTreeDevLevel()).extractValue(tree);
-            metaFeatures[mfid + 3] = (new PrunedTreeHeight()).extractValue(tree);
-            metaFeatures[mfid + 4] = (new PrunedTreeLeavesNumber()).extractValue(tree);
-            metaFeatures[mfid + 5] = (new PrunedTreeMaxAttr()).extractValue(tree);
-            metaFeatures[mfid + 6] = (new PrunedTreeMaxBranch()).extractValue(tree);
-            metaFeatures[mfid + 7] = (new PrunedTreeMaxLevel()).extractValue(tree);
-            metaFeatures[mfid + 8] = (new PrunedTreeMeanAttr()).extractValue(tree);
-            metaFeatures[mfid + 9] = (new PrunedTreeMeanBranch()).extractValue(tree);
-            metaFeatures[mfid + 10] = (new PrunedTreeMeanLevel()).extractValue(tree);
-            metaFeatures[mfid + 11] = (new PrunedTreeNodeNumber()).extractValue(tree);
-            metaFeatures[mfid + 12] = (new PrunedTreeWidth()).extractValue(tree);
-            metaFeatures[mfid + 13] = (new PrunedTreeDevClass()).extractValue(tree);
-            metaFeatures[mfid + 14] = (new PrunedTreeMaxClass()).extractValue(tree);
-            metaFeatures[mfid + 15] = (new PrunedTreeMinClass()).extractValue(tree);
-            metaFeatures[mfid + 16] = (new PrunedTreeMeanClass()).extractValue(tree);
+            metaFeatures[mfid++] = (new PrunedTreeDevAttr()).extractValue(tree); // 12
+            metaFeatures[mfid++] = (new PrunedTreeDevBranch()).extractValue(tree); // 13
+            metaFeatures[mfid++] = (new PrunedTreeDevLevel()).extractValue(tree); // 14
+            metaFeatures[mfid++] = (new PrunedTreeHeight()).extractValue(tree); // 15
+            metaFeatures[mfid++] = (new PrunedTreeMaxAttr()).extractValue(tree); // 16
+            metaFeatures[mfid++] = (new PrunedTreeMaxLevel()).extractValue(tree); // 17
+            metaFeatures[mfid++] = (new PrunedTreeMeanBranch()).extractValue(tree); // 18
+            metaFeatures[mfid++] = (new PrunedTreeMeanLevel()).extractValue(tree); // 19
+            metaFeatures[mfid++] = (new PrunedTreeNodeNumber()).extractValue(tree); // 20
+            metaFeatures[mfid++] = (new PrunedTreeWidth()).extractValue(tree); // 21
+            metaFeatures[mfid++] = (new PrunedTreeDevClass()).extractValue(tree); // 22
+            // metaFeatures[mfid++] = (new PrunedTreeMaxClass()).extractValue(tree); // 23
+            // metaFeatures[mfid++] = (new PrunedTreeMinClass()).extractValue(tree); // 24
+            // metaFeatures[mfid++] = (new PrunedTreeMeanClass()).extractValue(tree); // 25
+            // metaFeatures[mfid++] = (new PrunedTreeLeavesNumber()).extractValue(tree); // 16
+            // metaFeatures[mfid++] = (new PrunedTreeMaxBranch()).extractValue(tree); // 17
+            // metaFeatures[mfid++] = (new PrunedTreeMeanAttr()).extractValue(tree); // 19
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return mfid + 17;
+        return mfid;
     }
 
     private static double dist(double[] x) {
