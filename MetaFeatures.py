@@ -22,16 +22,20 @@ class MetaFeatures:
 
 objects = 128
 features = 16
-meta = 32
+meta = 23 + 3 # 23 MetaFeatures + 3 Landmarks
 
+mf = MetaFeatures(objects, features, meta)
 
 dataset = np.random.rand(objects, features)
 print(dataset)
-
-mf = MetaFeatures(objects, features, meta)
 result = mf.extract(dataset)
-
 print(result)
+
+dataset = np.random.rand(objects, features)
+print(dataset)
+result = mf.extract(dataset)
+print(result)
+
 mf.close()
 
 
