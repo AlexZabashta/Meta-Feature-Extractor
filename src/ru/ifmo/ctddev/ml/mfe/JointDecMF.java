@@ -62,7 +62,11 @@ public class JointDecMF {
     }
     public static final int LENGTH = MetaFeatures.LENGTH + Landmarks.LENGTH;
 
-    public static double[] extract(int objects, int features, int classes, double[][] data, int[] labels, Instances instances) {
+    public static double[] extract(int objects, int features, int classes, double[][] data, int[] labels) {
+
+        Utils.normalize(objects, features, data);
+        Instances instances = Utils.convert(objects, features, classes, data, labels);
+
         double[] vectMF = MetaFeatures.extract(objects, features, classes, data, labels, instances);
         double[] vectLM = Landmarks.extract(instances);
         double[] vect = new double[LENGTH];

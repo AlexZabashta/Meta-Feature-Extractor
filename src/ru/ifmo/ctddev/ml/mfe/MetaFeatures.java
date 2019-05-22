@@ -9,16 +9,10 @@ import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeDevBranch;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeDevClass;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeDevLevel;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeHeight;
-import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeLeavesNumber;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMaxAttr;
-import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMaxBranch;
-import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMaxClass;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMaxLevel;
-import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMeanAttr;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMeanBranch;
-import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMeanClass;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMeanLevel;
-import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeMinClass;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeNodeNumber;
 import ru.ifmo.ctddev.ml.mfe.decisiontree.pruned.PrunedTreeWidth;
 import weka.classifiers.trees.j48.ModelSelection;
@@ -216,9 +210,9 @@ public class MetaFeatures {
             // metaFeatures[mfid++] = (new PrunedTreeMaxClass()).extractValue(tree); // 23
             // metaFeatures[mfid++] = (new PrunedTreeMinClass()).extractValue(tree); // 24
             // metaFeatures[mfid++] = (new PrunedTreeMeanClass()).extractValue(tree); // 25
-            // metaFeatures[mfid++] = (new PrunedTreeLeavesNumber()).extractValue(tree); // 16
-            // metaFeatures[mfid++] = (new PrunedTreeMaxBranch()).extractValue(tree); // 17
-            // metaFeatures[mfid++] = (new PrunedTreeMeanAttr()).extractValue(tree); // 19
+            // metaFeatures[mfid++] = (new PrunedTreeLeavesNumber()).extractValue(tree); // 26
+            // metaFeatures[mfid++] = (new PrunedTreeMaxBranch()).extractValue(tree); // 27
+            // metaFeatures[mfid++] = (new PrunedTreeMeanAttr()).extractValue(tree); // 28
         } catch (Exception e) {
             e.printStackTrace();
         }

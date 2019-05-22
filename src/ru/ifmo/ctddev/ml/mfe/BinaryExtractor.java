@@ -6,8 +6,6 @@ import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import weka.core.Instances;
-
 public class BinaryExtractor {
 
     public static void main(String[] args) throws IOException {
@@ -42,10 +40,8 @@ public class BinaryExtractor {
                         }
                         labels[oid] = (2 * oid < objects) ? 0 : 1;
                     }
-                    Utils.normalize(objects, features, data);
-                    Instances instances = Utils.convert(objects, features, classes, data, labels);
 
-                    double[] metaFeatures = JointDecMF.extract(objects, features, classes, data, labels, instances);
+                    double[] metaFeatures = JointDecMF.extract(objects, features, classes, data, labels);
                     assert len == metaFeatures.length;
                     ByteBuffer outputBuffer = ByteBuffer.allocate(metaFeatures.length * Double.BYTES);
                     outputBuffer.order(ByteOrder.LITTLE_ENDIAN);
