@@ -5,11 +5,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.logging.LogManager;
 
 public class BinaryExtractor {
 
     public static void main(String[] args) throws IOException {
-        // LogManager.getLogManager().reset();
+        LogManager.getLogManager().reset();
 
         int len = JointDecMF.LENGTH;
         final int objects = Integer.parseInt(args[0]), features = Integer.parseInt(args[1]), classes = 2;

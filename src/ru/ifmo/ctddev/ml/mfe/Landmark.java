@@ -27,13 +27,10 @@ public class Landmark implements ToDoubleBiFunction<Instances, Random> {
             double fscore = evaluation.weightedFMeasure();
             if (Double.isFinite(fscore) && 0 <= fscore && fscore <= 1) {
                 return fscore;
-            } else {
-                throw new IllegalStateException("Invalid F-score = " + fscore);
             }
         } catch (Exception e) {
-            System.err.println(e.getMessage());
-            return 0;
         }
+        return 0;
     }
 
     @Override
